@@ -2,11 +2,20 @@
 import { useEffect, useState } from "react";
 import SimpleForm from "./SimpleForm";
 import { Toaster } from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/signin');
+    }
+  })
   async function getPosts() {
     const res = await fetch("http://localhost:3001/api/getPosts");
     if (!res.ok) {

@@ -14,6 +14,11 @@ const SimpleForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+    if (title.trim() === "") {
+      toast.error("Title cannot be empty");
+      setLoading(false);
+      return;
+    }
 
     const data = await fetch("api/setPosts", {
       method: "POST",
@@ -21,15 +26,16 @@ const SimpleForm = () => {
     });
     const res = await data.json();
     if(res.ok){
-        setLoading(false);
-        setTitle("");
-        toast.success("Post added successfully");
-        router.refresh();
-    }
-    else {
       toast.error(res.message);
       setLoading(false);
       return 0;
+    }
+    else {
+      setLoading(false);
+      setTitle("");
+      toast.success("Post added successfully");
+      router.refresh();
+      
     }
   }
 

@@ -10,8 +10,8 @@ export default async function POST(
         const post = JSON.parse(req.body)
         if(req.method==="POST"){
             if(!post.title.length){
-                res.status(500).json({message:"post title can't be empty"})
-                return
+                return  res.status(500).json({message:"post title can't be empty"})
+                
             }
             try {
                 const data = await prisma.post.create({

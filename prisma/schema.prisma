@@ -18,3 +18,12 @@ model Post {
   content   String?
   published Boolean @default(false)
 }
+
+model User {
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  name       String
+  password   String
+  created_at DateTime     @default(now())
+  status     String       @default("active")
+}
