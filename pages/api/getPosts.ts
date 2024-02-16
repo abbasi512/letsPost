@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../prisma/client"
 
-
 export default async function GET(
     req: NextApiRequest,
     res: NextApiResponse
